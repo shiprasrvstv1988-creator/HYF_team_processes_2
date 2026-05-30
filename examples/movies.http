@@ -1,0 +1,32 @@
+### Get all movies
+GET http://localhost:3000/movies
+
+###
+
+### Add a movie - Inception
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "title": "Inception"
+}
+
+###
+
+### Add a movie - The Matrix
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "title": "The Matrix"
+}
+
+###
+
+### Add a movie - Interstellar
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+  "title": "Interstellar"
+}

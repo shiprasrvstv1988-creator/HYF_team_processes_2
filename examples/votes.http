@@ -1,0 +1,40 @@
+### Get all votes
+GET http://localhost:3000/votes
+
+###
+
+### Vote for Inception (movieId: 1) - Alice
+POST http://localhost:3000/votes
+Content-Type: application/json
+
+{
+  "movieId": 1,
+  "voterName": "Alice"
+}
+
+###
+
+### Vote for Inception (movieId: 1) - Bob
+POST http://localhost:3000/votes
+Content-Type: application/json
+
+{
+  "movieId": 1,
+  "voterName": "Bob"
+}
+
+###
+
+### Vote for The Matrix (movieId: 2) - Charlie
+POST http://localhost:3000/votes
+Content-Type: application/json
+
+{
+  "movieId": 2,
+  "voterName": "Charlie"
+}
+
+###
+
+### Get result (ranked by votes)
+GET http://localhost:3000/result
