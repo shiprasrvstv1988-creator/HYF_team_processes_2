@@ -1,7 +1,13 @@
+import z from "zod";
 const express = require("express");
 const router = express.Router();
 const movies = require("../data/movies");
 
+// MovieValidation
+const movieSchema = z.object({
+  id: z.number(),
+  name: z.string().min(3),
+});
 router.get("/", (req, res) => {
   // TODO: return all movies
 });
