@@ -34,6 +34,12 @@ const votes = [
     movieId: 3,
     voterName: "Rashmi",
   },
+
+  {
+    id: 7,
+    movieId: 3,
+    voterName: "Bob",
+  },
 ];
 
 module.exports = votes;
