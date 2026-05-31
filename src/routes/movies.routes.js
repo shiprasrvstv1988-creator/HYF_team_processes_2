@@ -3,20 +3,24 @@ const router = express.Router();
 const movies = require("../data/movies");
 
 router.get("/", (req, res) => {
-  // TODO: return all movies
+  res.json(movies);
 });
 
 router.post("/", (req, res) => {
-  // TODO: implement movie creation
-  //
-  // Expected request body: { title: "Inception" }
-  // Expected response: the created movie with a unique id
-  //
-  // Hints:
-  // - validate that title is present in req.body
-  // - generate a simple id (e.g. Date.now() or movies.length + 1)
-  // - push the new movie into the movies array
-  // - respond with status 201 and the created movie
+  const { title } = req.body;
+
+  if (typeof title !== "string" || title.trim() === "") {
+    return res.status(400).json({ error: "title is required" });
+  }
+
+  const newMovie = {
+    id: movies.length > 0 ? movies[movies.length - 1].id + 1 : 1,
+    title: title.trim(),
+  };
+
+  movies.push(newMovie);
+
+  return res.status(201).json(newMovie);
 });
 
 module.exports = router;
