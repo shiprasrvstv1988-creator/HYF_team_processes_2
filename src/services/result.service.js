@@ -2,31 +2,30 @@ const movies = require("../data/movies");
 const votes = require("../data/votes");
 
 function calculateResult() {
-  const voteCounts = new Map(
-    movies.map((movie) => [movie.id, 0])
-  );
+  // 1. Start with all movies set to 0 votes
+  const voteCount = {};
+
+  for (const movie of movies) {
+    voteCount[movie.id] = 0;
+  } // 2. Count votes
 
   for (const vote of votes) {
-    if (voteCounts.has(vote.movieId)) {
-      voteCounts.set(vote.movieId, voteCounts.get(vote.movieId) + 1);
+    if (voteCount.hasOwnProperty(vote.movieId)) {
+      voteCount[vote.movieId]++;
     }
-  }
+  } // 3. Build result array
 
-  return movies
-    .map((movie, index) => ({
+  const result = movies.map((movie) => {
+    return {
       movieId: movie.id,
       title: movie.title,
-      votes: voteCounts.get(movie.id) || 0,
-      index,
-    }))
-    .sort((left, right) => {
-      if (right.votes !== left.votes) {
-        return right.votes - left.votes;
-      }
+      votes: voteCount[movie.id] || 0,
+    };
+  }); // 4. Sort by votes (highest first)
 
-      return left.index - right.index;
-    })
-    .map(({ index, ...result }) => result);
+  result.sort((a, b) => b.votes - a.votes);
+
+  return result;
 }
 
 module.exports = { calculateResult };

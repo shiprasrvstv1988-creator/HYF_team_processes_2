@@ -1,4 +1,3 @@
-const { z } = require("zod");
 const express = require("express");
 const router = express.Router();
 const movies = require("../data/movies");
@@ -38,6 +37,5 @@ router.post("/", (req, res) => {
     data: newMovie,
   });
 });
-
 
 module.exports = router;
