@@ -1,0 +1,4 @@
+root: C:\Users\fatem\Source\HYF_team_processes_2 
+path: C:\Program Files\nodejs 
+arch: 64 
+proxy: none
