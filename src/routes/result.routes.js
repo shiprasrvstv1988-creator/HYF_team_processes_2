@@ -3,7 +3,7 @@ const router = express.Router();
 const { calculateResult } = require("../services/result.service");
 
 router.get("/", (req, res) => {
-  // TODO: call calculateResult() and return the result
+  res.status(200).json(calculateResult());
 });
 
 module.exports = router;
