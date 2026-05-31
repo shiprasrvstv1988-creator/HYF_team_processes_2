@@ -2,17 +2,31 @@ const movies = require("../data/movies");
 const votes = require("../data/votes");
 
 function calculateResult() {
-  // TODO: implement vote tallying
-  //
-  // Expected logic:
-  // 1. Count how many votes each movie has received
-  // 2. Return an array of movies sorted by vote count, highest first
-  // 3. Each item in the array should have: { movieId, title, votes }
-  //
-  // Hint: start with a map of movieId -> vote count (all zeros),
-  // then loop through votes and increment the count for each movieId.
+  const voteCounts = new Map(
+    movies.map((movie) => [movie.id, 0])
+  );
 
-  return [];
+  for (const vote of votes) {
+    if (voteCounts.has(vote.movieId)) {
+      voteCounts.set(vote.movieId, voteCounts.get(vote.movieId) + 1);
+    }
+  }
+
+  return movies
+    .map((movie, index) => ({
+      movieId: movie.id,
+      title: movie.title,
+      votes: voteCounts.get(movie.id) || 0,
+      index,
+    }))
+    .sort((left, right) => {
+      if (right.votes !== left.votes) {
+        return right.votes - left.votes;
+      }
+
+      return left.index - right.index;
+    })
+    .map(({ index, ...result }) => result);
 }
 
 module.exports = { calculateResult };
